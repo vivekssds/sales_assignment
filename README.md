@@ -32,7 +32,9 @@ Make sure you have docker installed on local machine.
     docker-compose up
    ```
 3. Exec into MySQL Container 
-    ``` docker exec -it mysql_container_sales 
+    ```
+    docker exec -it mysql_container_sales
+     
     ```  
 4. Connect MySQL
     ```mysql -h 127.0.0.1 -P 3306 -u root -p
