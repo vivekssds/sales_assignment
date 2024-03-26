@@ -24,7 +24,13 @@ default_args = {
 }
 
 
-@dag(schedule="@daily", start_date=datetime(2021, 12, 1), catchup=False)
+@dag(
+    schedule="@daily",
+    start_date=datetime(2021, 12, 1),
+    catchup=False,
+    concurrency=5,
+    max_active_runs=1,
+)
 def sales_data_pipeline():
     @task()
     def get_sales_data_from_csv():
@@ -55,12 +61,12 @@ def sales_data_pipeline():
             print(f"Failed to fetch user data. Status code: {response.status_code}")
             return None
 
-    @task
+    @task(max_active_tis_per_dag=4)
     def build_exec_pipeline_sales_data(sales_data_df, users_data_df):
         users_sales_data_df = pd.merge(
             users_data_df, sales_data_df, left_on="id", right_on="customer_id"
         )
-        weather_info_df = users_sales_data_df.head(5).apply(get_weather_info, axis=1)
+        weather_info_df = users_data_df.apply(get_weather_info, axis=1)
         users_sales_data_df = pd.concat([users_sales_data_df, weather_info_df], axis=1)
         users_sales_data_df["sunrise_time"] = pd.to_datetime(
             users_sales_data_df["sunrise"], unit="s"
@@ -74,7 +80,7 @@ def sales_data_pipeline():
         users_sales_data_df.to_sql(
             "sales_raw_data_tbl",
             con=engine,
-            schema="sales_raw",
+            schema="card_service",
             if_exists="append",
             index=False,
         )
