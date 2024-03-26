@@ -1,0 +1,57 @@
+[2024-03-25T14:54:46.948+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: mysql_sample_dag.mysql_query_1 manual__2024-03-25T14:54:45.873318+00:00 [queued]>
+[2024-03-25T14:54:46.951+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: mysql_sample_dag.mysql_query_1 manual__2024-03-25T14:54:45.873318+00:00 [queued]>
+[2024-03-25T14:54:46.952+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-03-25T14:54:46.957+0000] {taskinstance.py:2192} INFO - Executing <Task(MySqlOperator): mysql_query_1> on 2024-03-25 14:54:45.873318+00:00
+[2024-03-25T14:54:46.960+0000] {standard_task_runner.py:60} INFO - Started process 355 to run task
+[2024-03-25T14:54:46.963+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'mysql_sample_dag', 'mysql_query_1', 'manual__2024-03-25T14:54:45.873318+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/mysqltest.py', '--cfg-path', '/tmp/tmp0ce9zq_h']
+[2024-03-25T14:54:46.965+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask mysql_query_1
+[2024-03-25T14:54:46.994+0000] {task_command.py:423} INFO - Running <TaskInstance: mysql_sample_dag.mysql_query_1 manual__2024-03-25T14:54:45.873318+00:00 [running]> on host 999def8209c6
+[2024-03-25T14:54:47.035+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='mysql_sample_dag' AIRFLOW_CTX_TASK_ID='mysql_query_1' AIRFLOW_CTX_EXECUTION_DATE='2024-03-25T14:54:45.873318+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-03-25T14:54:45.873318+00:00'
+[2024-03-25T14:54:47.035+0000] {sql.py:276} INFO - Executing: select * from dbtdb.test
+[2024-03-25T14:54:47.036+0000] {connection.py:473} ERROR - Unable to retrieve connection from secrets backend (LocalFilesystemBackend). Checking subsequent secrets backend.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/connection.py", line 468, in get_connection_from_secrets
+    conn = secrets_backend.get_connection(conn_id=conn_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 316, in get_connection
+    if conn_id in self._local_connections:
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 313, in _local_connections
+    return load_connections_dict(self.connections_file)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 265, in load_connections_dict
+    secrets: dict[str, Any] = _parse_secret_file(file_path)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 162, in _parse_secret_file
+    raise AirflowException(
+airflow.exceptions.AirflowException: File /opt/secrets/connections.yaml was not found. Check the configuration of your Secrets backend.
+[2024-03-25T14:54:47.043+0000] {base.py:83} INFO - Using connection ID 'mysql_conn' for task execution.
+[2024-03-25T14:54:47.044+0000] {connection.py:473} ERROR - Unable to retrieve connection from secrets backend (LocalFilesystemBackend). Checking subsequent secrets backend.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/connection.py", line 468, in get_connection_from_secrets
+    conn = secrets_backend.get_connection(conn_id=conn_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 316, in get_connection
+    if conn_id in self._local_connections:
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 313, in _local_connections
+    return load_connections_dict(self.connections_file)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 265, in load_connections_dict
+    secrets: dict[str, Any] = _parse_secret_file(file_path)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/secrets/local_filesystem.py", line 162, in _parse_secret_file
+    raise AirflowException(
+airflow.exceptions.AirflowException: File /opt/secrets/connections.yaml was not found. Check the configuration of your Secrets backend.
+[2024-03-25T14:54:47.049+0000] {base.py:83} INFO - Using connection ID 'mysql_conn' for task execution.
+[2024-03-25T14:54:47.061+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/operators/sql.py", line 282, in execute
+    output = hook.run(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 385, in run
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/mysql/hooks/mysql.py", line 195, in get_conn
+    return MySQLdb.connect(**conn_config)
+  File "/home/airflow/.local/lib/python3.8/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/MySQLdb/connections.py", line 193, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (1049, "Unknown database '***'")
+[2024-03-25T14:54:47.069+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=mysql_sample_dag, task_id=mysql_query_1, execution_date=20240325T145445, start_date=20240325T145446, end_date=20240325T145447
+[2024-03-25T14:54:47.074+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 4 for task mysql_query_1 ((1049, "Unknown database '***'"); 355)
+[2024-03-25T14:54:47.094+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-03-25T14:54:47.105+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
