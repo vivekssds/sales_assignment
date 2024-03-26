@@ -37,7 +37,8 @@ Make sure you have docker installed on local machine.
 
     ```  
 4. Connect MySQL
-    ```mysql -h 127.0.0.1 -P 3306 -u root -p
+    ```
+    mysql -h 127.0.0.1 -P 3306 -u root -p
     password : root_admin 
     create database sales_raw;
     create database sales_aggregate;
