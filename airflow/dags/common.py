@@ -3,6 +3,7 @@ import requests
 import os
 from sqlalchemy import create_engine
 from airflow.providers.mysql.hooks.mysql import MySqlHook
+from airflow.models import Variable
 
 BASE_DIR = os.path.dirname(__file__)
 DQ_DIR = os.path.dirname(BASE_DIR)
@@ -41,11 +42,9 @@ def get_users_data_from_api():
         print(f"Failed to fetch user data. Status code: {response.status_code}")
         return None
 
-
-def get_weather_info(row):
-    weather_api_key='35bc2c1eac5372747f3f87683237b713'
-    weather_data = fetch_weather_data(weather_api_key, row['latitude'], row['longitude'])
-    # print(weather_data)
+def get_weather_info(users_sales_data):
+    weather_api_key = Variable.get("WEATHER_API_KEY")
+    weather_data = fetch_weather_data(weather_api_key, users_sales_data['latitude'], users_sales_data['longitude'])
     if weather_data:
         weather_description = weather_data['weather'][0]['description']
         temp_min = weather_data['main']['temp_min']
@@ -68,10 +67,10 @@ def get_weather_info(row):
                           'sunset': None})
 
 
-def execute_query_and_write_to_table(query, target_table,schema,mysql_connection_id='mysql_conn'):
+def execute_query_and_write_to_table(query, target_table,schema,mysql_connection_id):
     engine = get_engine(mysql_connection_id)
     df = pd.read_sql(query, engine)
-    df.to_sql(target_table, engine, if_exists='replace', index=False)
+    df.to_sql(target_table, engine, if_exists='replace',schema=schema, index=False)
 
 
 def get_engine(mysql_connection_id):

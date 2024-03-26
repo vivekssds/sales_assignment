@@ -34,7 +34,7 @@ Make sure you have docker installed on local machine.
 3. Exec into MySQL Container 
     ```
     docker exec -it mysql_container_sales
-     
+
     ```  
 4. Connect MySQL
     ```mysql -h 127.0.0.1 -P 3306 -u root -p
@@ -50,11 +50,12 @@ Make sure you have docker installed on local machine.
    ```
 6. First Step is to Define Airflow Variables
    ```JS
-   Navigate to `http://localhost:8000/` on the browser
+   Navigate to `http://localhost:8080/` on the browser
    use `airflow` for username
    use `airflow` for password
    from Drop Down click on connections 
    Add connections (Refer to the File /scripts_airflow/init.sh)
+   Add variables (Refer to the File /scripts_airflow/init.sh)
    ```
 
 ### Documentation
