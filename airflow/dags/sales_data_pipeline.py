@@ -13,9 +13,13 @@ Steps:
 from datetime import datetime
 from airflow.decorators import dag
 import pandas as pd
+import os
 import requests
 from airflow.decorators import task
 from common import get_weather_info, get_engine
+
+BASE_DIR = os.path.dirname(__file__)
+DQ_DIR = os.path.dirname(BASE_DIR)
 
 default_args = {
     "owner": "vivek.saini@gmail.com",
@@ -34,8 +38,8 @@ default_args = {
 def sales_data_pipeline():
     @task()
     def get_sales_data_from_csv():
-        csv_file_path = "/usr/local/airflow/dags/AI/sales_data.csv"
-        sales_data_df = pd.read_csv(csv_file_path)
+        csv_file_path = "{DQ_DIR}/dags/sales_data.csv"
+        sales_data_df = pd.read_csv(csv_file_path.format(DQ_DIR=DQ_DIR))
         return sales_data_df
 
     @task()
@@ -80,12 +84,12 @@ def sales_data_pipeline():
         users_sales_data_df.to_sql(
             "sales_raw_data_tbl",
             con=engine,
-            schema="card_service",
+            schema="sales_raw",
             if_exists="append",
             index=False,
         )
 
     build_exec_pipeline_sales_data(get_sales_data_from_csv(), get_users_data_from_api())
-
+    get_sales_data_from_csv >> get_users_data_from_api >> build_exec_pipeline_sales_data
 
 sales_data_pipeline()

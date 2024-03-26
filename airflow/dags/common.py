@@ -1,9 +1,9 @@
 import pandas as pd
 import requests
-import os
 from sqlalchemy import create_engine
 from airflow.providers.mysql.hooks.mysql import MySqlHook
 from airflow.models import Variable
+import os
 
 BASE_DIR = os.path.dirname(__file__)
 DQ_DIR = os.path.dirname(BASE_DIR)
@@ -84,7 +84,7 @@ def get_weather_info(users_sales_data):
 def execute_query_and_write_to_table(query, target_table, schema, mysql_connection_id):
     engine = get_engine(mysql_connection_id)
     df = pd.read_sql(query, engine)
-    df.to_sql(target_table, engine, if_exists="replace", schema=schema, index=False)
+    df.to_sql(target_table, engine, if_exists="append", schema=schema, index=False)
 
 
 def get_engine(mysql_connection_id):

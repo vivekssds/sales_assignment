@@ -58,7 +58,16 @@ Make sure you have docker installed on local machine.
    Add connections (Refer to the File /scripts_airflow/init.sh)
    Add variables (Refer to the File /scripts_airflow/init.sh)
    ```
+7. Output tables are below which can be queried and used in Visualization
+    ```JS
+    Select * from sales_aggregate.monthly_sales_tbl
 
+    Select * from sales_aggregate.top5_products_by_sales_tbl
+
+    Select * from sales_aggregate.average_quality_per_product_tbl
+
+    Select * from sales_aggregate.sales_by_customer_tbl
+    ```
 ### Documentation
 Recommended docstring format is [Google format](https://google.github.io/styleguide/pyguide.html#381-docstrings)
 
