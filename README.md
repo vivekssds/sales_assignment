@@ -49,6 +49,9 @@ Make sure you have docker installed on local machine.
    use `airflow` for username
    use `airflow` for password
    ```
+   <!-- MARKDOWN LINKS & IMAGES -->
+[Airflow Dags]: airflow_dags.PNG
+
 6. First Step is to Define Airflow Variables
    ```JS
    Navigate to `http://localhost:8080/` on the browser
@@ -68,6 +71,7 @@ Make sure you have docker installed on local machine.
 
     Select * from sales_aggregate.sales_by_customer_tbl
     ```
+[DB schema]: db_tables.PNG    
 ### Documentation
 Recommended docstring format is [Google format](https://google.github.io/styleguide/pyguide.html#381-docstrings)
 
