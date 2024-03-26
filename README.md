@@ -61,7 +61,7 @@ Make sure you have docker installed on local machine.
    Add connections (Refer to the File /scripts_airflow/init.sh)
    Add variables (Refer to the File /scripts_airflow/init.sh)
 
-   
+   Trigger sales_data_pipeline to populate raw tables , then trigger sales_populate_datamarts to populate consumer zone tables for visualization
    ```
 7. Output tables are below which can be queried and used in Visualization
     ```JS
