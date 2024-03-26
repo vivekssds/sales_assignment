@@ -60,6 +60,8 @@ Make sure you have docker installed on local machine.
    from Drop Down click on connections 
    Add connections (Refer to the File /scripts_airflow/init.sh)
    Add variables (Refer to the File /scripts_airflow/init.sh)
+
+   
    ```
 7. Output tables are below which can be queried and used in Visualization
     ```JS

@@ -90,6 +90,4 @@ def sales_data_pipeline():
         )
 
     build_exec_pipeline_sales_data(get_sales_data_from_csv(), get_users_data_from_api())
-    get_sales_data_from_csv >> get_users_data_from_api >> build_exec_pipeline_sales_data
-
 sales_data_pipeline()
