@@ -41,6 +41,7 @@ Make sure you have docker installed on local machine.
     password : root_admin 
     create database sales_raw;
     create database sales_aggregate;
+    Create target tables here is the Schema /airflow/dags/create_table.sql
     ```
 5. Open Airflow web browser
    ```JS
