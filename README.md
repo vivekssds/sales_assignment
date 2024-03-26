@@ -29,7 +29,7 @@ Make sure you have docker installed on local machine.
    ```
 2. Run (This will create Airflow and MySQL Containers)
    ```sh
-    docker-compose up
+    docker-compose up -d
    ```
 3. Exec into MySQL Container 
     ```
