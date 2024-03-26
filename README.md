@@ -25,7 +25,7 @@ Make sure you have docker installed on local machine.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/pyjavo/update_csv_pipeline
+   git clone https://github.com/vivekssds/sales_assignment.git
    ```
 2. Run (This will create Airflow and MySQL Containers)
    ```sh
